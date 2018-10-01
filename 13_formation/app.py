@@ -7,13 +7,12 @@ app = Flask(__name__)
 def test_form():
     return render_template('forms.html')
 
-@app.route('/auth')
+@app.route('/auth', methods=["GET", "POST"])
 def authenticate():
-    print(app)
-    print(request)
-    print(request.args)
-    print(request.headers)
-    name = request.args['username']
+    if request.method == "GET":
+        name = request.args['username']
+    else:
+        name = request.form['username']
     method = request.method
     return render_template('welcome.html',name=name,method=method)
 
