@@ -17,8 +17,8 @@ reader = csv.DictReader(csvfile)
 command = "CREATE TABLE courses(code TEXT, mark INTEGER, id INTEGER)"
 c.execute(command)
 for row in reader:
-    command = 'INSERT INTO courses VALUES("{0}",{1},{2})'.format(row['code'], row['mark'], row['id'])
-    c.execute(command)
+    command = 'INSERT INTO courses VALUES(?,?,?)'
+    c.execute(command,(row['code'], row['mark'], row['id']))
 
 # Create and populate the courses table
 csvfile = open('data/peeps.csv')
@@ -26,7 +26,7 @@ reader = csv.DictReader(csvfile)
 command = "CREATE TABLE peeps(name TEXT, age INTEGER, id INTEGER)"
 c.execute(command)
 for row in reader:
-    command = 'INSERT INTO peeps VALUES("{0}",{1},{2})'.format(row['name'], row['age'], row['id'])
-    c.execute(command)
+    command = 'INSERT INTO peeps VALUES(?,?,?)'
+    c.execute(command,(row['name'], row['age'], row['id']))
 
 db.commit() #save changes

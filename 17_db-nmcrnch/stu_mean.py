@@ -46,13 +46,13 @@ def populate():
     all_average = get_all_avg()
     # Iterates through the list from the get_all_avg function and adds it to the table
     for student in all_average:
-        command = 'INSERT INTO peeps_avg VALUES({0},{1})'.format(student[1],student[2])
-        c.execute(command)
+        command = 'INSERT INTO peeps_avg VALUES(?,?)'
+        c.execute(command,(student[1],student[2]))
 
 # Adds a course to the table
 def add_courses(course_name,grade,student_id):
-    command = 'INSERT INTO courses VALUES("{0}",{1},{2})'.format(course_name,grade,student_id)
-    c.execute(command)
+    command = 'INSERT INTO courses VALUES(?,?,?)'
+    c.execute(command,(course_name,grade,student_id))
     db.commit();
 
 #Tests
